@@ -1,5 +1,5 @@
 <template>
-  <div class="button">
+  <div>
     <el-button type="text">遥感数据</el-button>
   </div>
 </template>
