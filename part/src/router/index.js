@@ -1,27 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Function from '@/components/Function.vue'
+import functions from '../components/functions.vue'
 
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
-
+import 'element-ui/lib/theme-chalk/index.css'
+import qs from 'qs'
+import axios from 'axios'
+Vue.prototype.$http = axios
 
 Vue.use(Router)
 Vue.use(ElementUI)
-
+Vue.use(qs)
 export default new Router({
   mode:"history",
   routes: [
     {
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: Home
     },
     {
-      path: '/Function',
-      name:'Function',
-      component: Function
+      path: '/functions',
+      name:'functions',
+      component: functions
     }
   ]
 })
