@@ -1,17 +1,46 @@
 <template>
   <div>
-  <el-carousel :interval="4000" type="card" height="375px">
+  <el-menu
+  :default-active="activeIndex2"
+  class="el-menu-demo"
+  mode="horizontal"
+  @select="handleSelect"
+  background-color="#545c64"
+  text-color="#fff"
+  active-text-color="#ffd04b">
+ 
+  <el-menu-item index="1" a href="#introduction">项目简介</el-menu-item>
+  
+  <el-submenu index="2">
+    <template slot="title">功能介绍</template>
+    <el-menu-item index="2-1" a href="#detail">建筑物检测</el-menu-item>
+    <el-menu-item index="2-2">建筑物提取</el-menu-item>
+    <el-menu-item index="2-3">建筑物分类</el-menu-item>
+    <el-menu-item index="2-4">交互式标注</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="3" disabled>联系我们</el-menu-item>
+  <el-menu-item index="4"><a href="">联系我们</a></el-menu-item>
+</el-menu>
+<h1 id="introduction">
+  <el-carousel :interval="4000" type="card" height="375px" >
     <el-carousel-item v-for="(item,index) in list_img" :key="index">
         <img :src="item.url" alt />
       <h3 class="medium">{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
+  </h1>
   <div class="demo demo-flex">
 <span>图像数据标注是指将图像数据中各个感兴趣的部分指定为各种类型的工作。<br>目前遥感卫星图像标注是图像标注工作中的一个重要组成部分<br>由于卫星拍摄的遥
 感图像在城市中的元素大都是一些建筑物的房顶、绿地和湖泊等<br>其中的房屋元素具有重要的研究价值<br>从而使遥感卫星图像的房屋部分成为了这些工作中的主
 角<br>本系统对遥感图像进行标注的任务即标注出图像中的房屋。</span>
 </div>
-    <div class="demo-image__placeholder">
+    <div class="demo-image__placeholder" id="detail">
     <div class="block">
       <el-image :src="require('@/assets/img/img1.png')" />
     </div>
@@ -42,11 +71,15 @@ export default {
                 {url: require('@/assets/img/img1.png')},
                 {url: require('@/assets/img/img1.png')}
                 ],
+                activeIndex2: '1'
             };
         },
   methods: {
       remote:function() {
         this.$router.push('/functions');
+      },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
       }
     }
 }

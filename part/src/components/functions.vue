@@ -23,7 +23,6 @@
         <span
           v-if="!disabled"
           class="el-upload-list__item-delete"
-          @click="toBase64(file)"
         >
           <i class="el-icon-printer"></i>
         </span>
@@ -35,14 +34,21 @@
           <i class="el-icon-delete"></i>
         </span>
       </span>
-    
+   
     </div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
 
-<p>点击上传图像</p>
+<p>点击上传图像</p> 
+<button @click="toBase64(file)">开始解译</button> 
+<li v-for="results1 in msg">
+<span v-for="results1 in msg">{{results1.keyword}}</span>
+<span v-for="results2 in msg">{{results2.score}}</span>
+</li>
+
+
 </div>  
 
 </template>
@@ -64,7 +70,9 @@ export default {
         dialogVisible: false,
         disabled: false,
         respStore:null,
-        
+        msg:null,
+        results1:"",
+        results2:""
 　　};
 },
 watch:{
@@ -84,8 +92,7 @@ methods: {
       reader.onloadend = function () {
           $("#base64Img").attr("style","display:inline-block");
           $("#base64Img").attr("src",reader.result);
-          var result = (reader.result).split(",")[1];
-    
+          var result = (reader.result).split(",")[1];    
           that.imageUrl = reader.result
           that.updataImg(result)
       }
@@ -96,7 +103,9 @@ methods: {
     updataImg(base64){
       console.log(base64.toString())
 const data1 = {'image':base64}
+var that = this;
 axios({
+  
   method: 'post',
   url: 'https://218.89.171.168:31218/classification',
   headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -105,8 +114,13 @@ axios({
 .then(function (response) {
   console.log(JSON.stringify(response.data));
   console.log(response.data.result.length)
-  for(var i=0;i<response.data.result.length;i++)
-  console.log(response.data.result[i].keyword,response.data.result[i].score);
+  for(var i=0;i<response.data.result.length;i++){
+    that.msg = response.data.result;
+    that.results1 = response.data.result[i].keyword,
+    that.results2 = response.data.result[i].score
+    console.log(that.results1,that.results2)
+  }
+  
 })
 .catch(function (error) {
   console.log(error);
