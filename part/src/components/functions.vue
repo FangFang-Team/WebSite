@@ -5,7 +5,6 @@
   list-type="picture-card"
   :auto-upload="false" 
   :on-progress="u"
- 
   >
     <i slot="default" class="el-icon-plus"></i>
     <div slot="file" slot-scope="{file}" >
@@ -34,7 +33,7 @@
           <i class="el-icon-delete"></i>
         </span>
       </span>
-   
+  
     </div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
@@ -43,10 +42,10 @@
 
 <p>点击上传图像</p> 
 <button @click="toBase64(file)">开始解译</button> 
-<li v-for="results1 in msg">
-<span v-for="results1 in msg">{{results1.keyword}}</span>
-<span v-for="results2 in msg">{{results2.score}}</span>
-</li>
+
+<p v-for="results1 in msg">{{results1.keyword}} </p>
+<p v-for="results2 in msg">{{results2.score}} </p>
+
 
 
 </div>  
