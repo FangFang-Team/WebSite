@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <title>智能解译系统</title>
     <!-- 导航栏 -->
   <header>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" 
@@ -14,7 +15,7 @@
       <el-menu-item index="2-4">交互式标注</el-menu-item>
     </el-submenu>
     <el-menu-item index="3" class="font1"><a href="#footer" >联系我们</a></el-menu-item>
-    <el-menu-item index="4" class="font2"><a href="">登录</a></el-menu-item>
+    <el-menu-item index="4" class="font2"><a href="" @click="login">登录</a></el-menu-item>
     <el-menu-item index="5" class="font2"><a href="">注册</a></el-menu-item>
     </el-menu>
   </header>
@@ -42,23 +43,53 @@
   </h1>
   <div class="demo demo-flex">
 <span class="word1">图像数据标注是指将图像数据中各个感兴趣的部分指定为各种类型的工作。<br>目前遥感卫星图像标注是图像标注工作中的一个重要组成部分<br>由于卫星拍摄的遥
-感图像在城市中的元素大都是一些建筑物的房顶、绿地和湖泊等<br>其中的房屋元素具有重要的研究价值<br>从而使遥感卫星图像的房屋部分成为了这些工作中的主
-角<br>本系统对遥感图像进行标注的任务即标注出图像中的房屋。</span>
+感图像在城市中的元素大都是一些建筑物的房顶、绿地和湖泊等<br>其中的房屋元素具有重要的研究价值<br>从而使遥感卫星图像的房屋部分成为了这些工作中的主角<br>本系统对遥感图像进行标注的任务即标注出图像中的房屋。</span>
 </div>
 
 <!-- 功能部分 -->
 <h2 id="detail">
-  <div>
-    
-  </div>
-    <div class="demo-image__placeholder">
-      <div class="block">
-          <el-image class="block" :src="require('@/assets/img/img5.jpg')" />
-          <el-image class="block" :src="require('@/assets/img/img7.jpg')" />
-          <el-image class="block" :src="require('@/assets/img/img4.gif')" @click="remote">
-          </el-image>
-      </div>
-      </div>
+  <div id="div1">
+            <div id="div2">
+              <div class="box" @click="data_center">
+                    <img src="@/assets/img/img5.jpg"/>
+                    <div class="text">
+                        <div class="blank">
+                        </div>
+                        <div class="h3">
+                            <h3>数据中心</h3>
+                            <p class="details">
+                                点此了解更多
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box" @click="remote">
+                    <img src="@/assets/img/img7.jpg"/>
+                    <div class="text">
+                        <div class="blank"></div>
+                        <div class="h3">
+                            <h3 @click="remote">街景分类</h3>
+                            <p class="details">
+                                点此了解更多
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <img src="@/assets/img/img4.gif"/>
+                    <div class="text">
+                        <div class="blank">
+                        </div>
+                        <div class="h3">
+                            <h3>交互式标注</h3>
+                            <p class="details">
+                                点此了解更多
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+    </div>
+    </div>
 </h2>
 
 <!-- footer -->
@@ -68,7 +99,7 @@
         <a href="#">项目简介</a> |
         <a href="#">功能介绍</a> |
         <a href="#">联系我们</a> |
-        <a href="#">登录</a> |
+        <a  @click="login">登录</a> |
         <a href="#">注册</a> 
       </div> 
       <p>
@@ -84,18 +115,25 @@
 export default {
   name: 'Home',
   data(){
+    
     return {
       list_img: [{url: require('@/assets/img/img1.png')},
                 {url: require('@/assets/img/img4.gif')},
                 {url: require('@/assets/img/img5.jpg')},
                 {url: require('@/assets/img/img6.jpg')}
                 ],
-                activeIndex: '1'
+                activeIndex: '1',
         };
         },
   methods: {
+      data_center:function(){
+        this.$router.push('/data_center')
+      },
       remote:function() {
         this.$router.push('/functions');
+      },
+      login:function(){
+        this.$router.push('/login');
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
@@ -182,23 +220,7 @@ a{
 .el-carousel__item:nth-child(2n+1) {
   background-color: #d3dce6;
 }
-.demo-image__placeholder .block {
-  padding: 0px 0;
-  text-align: center;
-  border-right: solid 1px var(--el-border-color);
-  display: inline-block;
-  box-sizing: border-box;
-  vertical-align: top;
-  margin-left: 2%;
-}
-.demo-image__placeholder .el-image {
-  float: left;
-  position: relative;
-  padding: 0 5px;
-  max-width: 30%;
-  height: 30%;
-  border-radius:17px;
-}
+
 .demo-image__placeholder .el-image:hover {
   filter:alpha(Opacity=80);
   -moz-opacity:0.8;
@@ -234,4 +256,68 @@ a{
   color: #888888;
   top: 30px;
 }
+html,
+            body {
+                height: 100%;
+            } 
+            #div1 {
+                width:100%;
+                height: 530px;
+                overflow: hidden;
+                position:relative;
+                text-align: center;
+            }           
+            #div2 {
+                margin-right: -30px;
+                margin-bottom: -30px;
+                overflow: auto;
+            }
+            
+            .box {
+                position: relative;
+                width: 30%;
+                height: 250px;
+                margin: 0 30px 30px 0;
+                background-size: 100% 100%;
+                float: left;
+            }
+            .box img{
+                width: 350px;
+                height: 250px;
+                border-radius: 15px;
+            }
+            
+            .box:hover .details {
+                display: block;
+            }
+            
+            .text {
+                position: relative;
+                bottom: 180px;
+                width: 300px;
+                line-height: 30px;
+                font-size: 20px;;
+                margin:auto;
+            }
+            
+            .blank {
+                float: left;
+                width: 80px;
+                background-color: transparent;
+                height: 30px;
+            }
+            
+            .h3 {
+                float: left;
+                width: 140px;
+                text-align: center;
+                color: #ffffff;
+            }
+            
+            .details {
+                color: #FFFFFF;
+                font-size: 13px;
+                display: none;
+            }
+            
 </style>
