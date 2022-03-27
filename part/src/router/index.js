@@ -5,6 +5,7 @@ import functions from '../components/functions.vue'
 import login from '../components/login.vue'
 import data_center from '../components/data_center.vue'
 import inter_ann from '../components/inter_ann.vue'
+import street_v_c from '../components/street_v_c.vue'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -58,6 +59,14 @@ export default new Router({
       component: inter_ann,
       meta:{
         title: '交互式标注'
+    }
+    },
+    {
+      path:'/street_v_c',
+      name:'street_v_c',
+      component: street_v_c,
+      meta:{
+        title: '街景分类'
     }
     }
   ]

@@ -84,7 +84,7 @@ export default {
 .login-page {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    margin: 180px auto;
+    margin: 120px auto;
     width: 350px;
     padding: 35px 35px 15px;
     background: #fff;
